@@ -1,0 +1,7 @@
+ai/memory/*.sqlite3
+output/logs/*.jsonl
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example

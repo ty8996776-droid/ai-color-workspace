@@ -1,0 +1,11 @@
+{
+  "name": "underwater_balance",
+  "version": "1.0",
+  "category": "海水/潜水",
+  "parameters": {
+    "Exposure": 0.08,
+    "Temperature": -160,
+    "Tint": 4,
+    "WaterStrength": 0.28
+  }
+}

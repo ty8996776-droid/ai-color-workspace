@@ -1,0 +1,11 @@
+{
+  "name": "deep_blue",
+  "version": "1.0",
+  "category": "海水/潜水",
+  "parameters": {
+    "Exposure": 0.04,
+    "Temperature": -140,
+    "Tint": 2,
+    "WaterStrength": 0.13
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "skin_protect",
+  "version": "1.0",
+  "category": "人像肤色",
+  "parameters": {
+    "Exposure": 0.0,
+    "Temperature": 80,
+    "Tint": -1,
+    "WaterStrength": -0.04
+  }
+}
