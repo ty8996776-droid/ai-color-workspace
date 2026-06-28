@@ -10,3 +10,9 @@
 - Added DCTL parameter presets and DCTL indexes.
 - Added unittest coverage for Agent output, API routes, and Memory persistence.
 - Added architecture, API, dataset, model, roadmap, project structure, and execution report documentation.
+
+## 2026-06-28
+
+- Added public repository README.
+- Added MIT license.
+- Added NOTICE file for third-party dependency and素材 tracking.

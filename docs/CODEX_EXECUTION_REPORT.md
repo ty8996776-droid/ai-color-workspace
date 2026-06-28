@@ -62,6 +62,9 @@ DCTL 参数和索引：
 
 文档：
 
+- `ai-color-workspace/README.md`
+- `ai-color-workspace/LICENSE`
+- `ai-color-workspace/NOTICE`
 - `ai-color-workspace/docs/ARCHITECTURE.md`
 - `ai-color-workspace/docs/API.md`
 - `ai-color-workspace/docs/DCTL_INDEX.md`

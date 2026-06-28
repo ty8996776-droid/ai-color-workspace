@@ -1,0 +1,13 @@
+AI Color Workspace
+Copyright (c) 2026 Timo
+
+This repository contains the open-source V2 foundation for an underwater AI color grading workspace.
+
+Current third-party dependencies:
+
+- Python standard library only for the MVP runtime and tests.
+- No bundled third-party model weights.
+- No bundled third-party video素材.
+- No bundled private API keys or `.env` files.
+
+Future additions such as AI models, DCTL files, LUT packs, media samples, or external libraries should be recorded here with source, license, version, and usage notes.
