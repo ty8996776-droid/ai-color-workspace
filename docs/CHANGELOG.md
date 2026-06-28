@@ -16,3 +16,4 @@
 - Added public repository README.
 - Added MIT license.
 - Added NOTICE file for third-party dependency and素材 tracking.
+- Added investor brief, partnership intake guide, and GitHub issue template for investment or partnership interest.
