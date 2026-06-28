@@ -75,14 +75,3 @@ See [docs/API.md](docs/API.md).
 ## Roadmap
 
 See [docs/ROADMAP.md](docs/ROADMAP.md).
-
-## Partnership / Investment Interest
-
-This project is open to early collaboration around underwater AI color workflows, creator tools, DaVinci handoff, and future commercial pilots.
-
-For public-safe partnership or investment interest, open an issue with the `Investment / Partnership Interest` template.
-
-See:
-
-- [docs/INVESTOR_BRIEF.md](docs/INVESTOR_BRIEF.md)
-- [docs/PARTNERSHIP_INTAKE.md](docs/PARTNERSHIP_INTAKE.md)
