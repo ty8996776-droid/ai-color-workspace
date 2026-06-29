@@ -12,6 +12,8 @@
 
 ## Phase 2: Current Workbench Integration
 
+- Publish a README screenshot or terminal GIF for the current JSON API demo.
+- Add a first release note once the quick-start path is verified from a clean clone.
 - Add a V2 API bridge to `Timo水下调色工作台.html`.
 - Send current frame metadata to `/analyze`.
 - Show Planner and Scorer output in the UI.

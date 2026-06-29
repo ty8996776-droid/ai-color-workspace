@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-06-29
+
+- Improved the public README with a clearer MVP status, quick start, demo flow, sample JSON output, and public asset notes.
+- Added `docs/DEMO.md` with a local curl walkthrough for `/analyze`, `/plan`, `/grade`, `/export`, and `/history`.
+- Linked the demo from the API reference and added public presentation tasks to the roadmap.
+
 ## 2026-06-25
 
 - Added AI Color Workspace V2 isolated project skeleton.

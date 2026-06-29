@@ -1,5 +1,7 @@
 # API Reference
 
+AI Color Workspace exposes a small standard-library JSON API for the MVP foundation. It is designed for local development and workbench integration tests, not public hosting.
+
 Run locally:
 
 ```bash
@@ -36,6 +38,8 @@ Errors use:
 
 ## POST /analyze
 
+Classifies placeholder scene metadata from a JSON request.
+
 Input:
 
 ```json
@@ -63,6 +67,8 @@ Output data:
 
 ## POST /plan
 
+Builds a suggested grading node order from Analyzer-style metadata.
+
 Input: Analyzer JSON.
 
 Output data:
@@ -75,6 +81,8 @@ Output data:
 ```
 
 ## POST /grade
+
+Builds versioned placeholder parameter JSON from Planner output.
 
 Input: Planner JSON.
 
@@ -119,3 +127,7 @@ Returns recent SQLite Memory records.
 ## GET /models
 
 Returns the currently available placeholder model registry.
+
+## Demo
+
+See [DEMO.md](DEMO.md) for a full local curl sequence.
