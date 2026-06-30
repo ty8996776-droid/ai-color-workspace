@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Local demo guide
+    url: https://github.com/ty8996776-droid/ai-color-workspace/blob/main/docs/DEMO.md
+    about: Run the current JSON API demo locally.
+  - name: Public release checklist
+    url: https://github.com/ty8996776-droid/ai-color-workspace/blob/main/docs/RELEASE_CHECKLIST.md
+    about: See what is ready before the first GitHub release.

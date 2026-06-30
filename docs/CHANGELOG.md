@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-06-30
+
+- Added GitHub issue templates for bug reports, feature requests, and demo feedback.
+- Added a pull request template with validation and privacy checks.
+- Added public demo asset planning, `v0.1.0` release checklist, and draft release notes.
+- Added a local source archive script for future GitHub Release assets.
+- Updated demo docs to include external repository and local model status routes.
+
 ## 2026-06-29
 
 - Improved the public README with a clearer MVP status, quick start, demo flow, sample JSON output, and public asset notes.

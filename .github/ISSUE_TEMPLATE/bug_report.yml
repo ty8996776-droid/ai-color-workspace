@@ -1,0 +1,60 @@
+name: Bug report
+description: Report a local run, API, demo, or documentation problem.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem. Please do not upload private footage, API keys, `.env` files, or customer media.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Local setup
+        - JSON API
+        - Analyzer or Planner
+        - DCTL/LUT handoff
+        - Demo documentation
+        - Release download
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the failure and what you expected instead.
+      placeholder: The demo command failed when...
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Commands or clicks needed to reproduce the issue.
+      placeholder: |
+        1. Run `python3 -m backend.server`
+        2. Send `POST /analyze`
+        3. See error...
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "macOS 15, Python 3.11, branch main"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant output
+      description: Paste only non-sensitive terminal output or JSON responses.
+      render: shell
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed private media, API keys, `.env` contents, and secrets from this report.
+          required: true

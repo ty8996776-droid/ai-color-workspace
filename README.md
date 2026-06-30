@@ -16,11 +16,14 @@ The first goal is a stable and testable platform skeleton that can later connect
 - Generate placeholder DCTL-style parameter JSON.
 - Save an export/scoring record into SQLite Memory.
 - Run the unit test suite to verify the MVP foundation.
+- Check downloaded external model/runtime status through `/local-models`.
 
 See [docs/DEMO.md](docs/DEMO.md) for a copy-paste local demo.
 
 ## Current Features
 
+- External GitHub Knowledge Registry for underwater enhancement, lightweight AI preview, color-science, DCTL, color-management, display-transform, and render-engine references.
+- Local external model runtime status and safe first-pass adapters for downloaded GitHub projects.
 - Analyzer Agent for scene and frame metadata analysis.
 - Planner Agent for color node planning.
 - DCTL Engine for versioned parameter generation.
@@ -124,18 +127,22 @@ curl -sS -X POST http://127.0.0.1:8790/analyze \
 - `POST /export`
 - `GET /history`
 - `GET /models`
+- `GET /external-repos`
+- `GET /local-models`
+- `POST /local-models/run`
 
 See [docs/API.md](docs/API.md).
 
 ## Public Demo Assets
 
-No public screenshots, GIFs, sample videos, or release downloads are published yet.
+No public screenshots, GIFs, sample videos, or release downloads are published yet. The public asset plan is tracked in [docs/PUBLIC_DEMO_ASSETS.md](docs/PUBLIC_DEMO_ASSETS.md), and the first release checklist is tracked in [docs/RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md).
 
-Recommended next public asset:
+Prepared next public assets:
 
-- A short terminal GIF showing `/analyze -> /plan -> /grade -> /export`.
-- One screenshot of the future workbench integration.
-- A first GitHub Release with a source archive and a verified quick-start note.
+- A terminal demo script for `/analyze -> /plan -> /grade -> /export -> /history`.
+- Issue templates for bug reports, feature requests, and demo feedback.
+- Draft release notes for `v0.1.0`.
+- A local source archive script for the first GitHub Release.
 
 ## Important Notes
 
@@ -147,3 +154,21 @@ Recommended next public asset:
 ## Roadmap
 
 See [docs/ROADMAP.md](docs/ROADMAP.md).
+
+## External GitHub Knowledge Registry
+
+The workspace keeps a conservative registry of useful GitHub projects in `ai/knowledge/github_registry.py` and documents the integration strategy in `docs/GITHUB_REPO_INDEX.md`. The registry is used by Planner output as `external_capabilities` and is available through `GET /external-repos`.
+
+## Local External Models
+
+Downloaded third-party projects live under `third_party/github/` and are ignored by Git. The workbench exposes their local state through `GET /local-models`.
+
+The first safe local runtime route is:
+
+```bash
+curl -sS -X POST http://127.0.0.1:8790/local-models/run \
+  -H 'Content-Type: application/json' \
+  -d '{"model_id":"colour-science-colour"}'
+```
+
+FUnIE-GAN has local weights in the downloaded repository and can run a CPU PyTorch probe through `/local-models/run`. Research models that require old TensorFlow/PyTorch stacks stay marked as dependency or checkpoint gated until verified.

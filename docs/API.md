@@ -76,7 +76,16 @@ Output data:
 ```json
 {
   "node_tree": ["Balance", "Exposure", "WB", "Contrast", "Water", "Look", "Sharpen"],
-  "recommended_dctl": ["underwater_balance", "deep_blue"]
+  "recommended_dctl": ["underwater_balance", "deep_blue"],
+  "external_capabilities": [
+    {
+      "name": "colour-science/colour",
+      "category": "color_science",
+      "integration_phase": "phase_1_analyzer_scorer"
+    }
+  ],
+  "external_warnings": ["Treat every GitHub project as an external reference until dependency, license, and image-quality tests pass."],
+  "external_next_step": "Create optional adapters that emit JSON metrics/preset suggestions before adding runtime dependencies."
 }
 ```
 
@@ -126,7 +135,49 @@ Returns recent SQLite Memory records.
 
 ## GET /models
 
-Returns the currently available placeholder model registry.
+Returns the currently available placeholder model registry plus external GitHub knowledge models marked as `external_knowledge` and `reference_only`.
+
+## GET /external-repos
+
+Returns the curated GitHub project registry for underwater enhancement, color-science, DCTL references, color-management, and future render engines. These entries are references first; runtime integration should be done through optional JSON adapters after license and quality checks.
+
+## GET /local-models
+
+Returns the local download and runtime state for external GitHub models under `third_party/github`.
+
+The route distinguishes downloaded projects, runnable local adapters, missing dependencies, missing checkpoints, and local asset indexes such as DCTL collections.
+
+## POST /local-models/run
+
+Runs a safe local adapter.
+
+Input:
+
+```json
+{
+  "model_id": "colour-science-colour",
+  "sample_rgb": [0.16, 0.42, 0.62],
+  "target_rgb": [0.42, 0.48, 0.50]
+}
+```
+
+Output data:
+
+```json
+{
+  "model": "colour-science-colour",
+  "run_mode": "builtin_colour_math",
+  "delta_e_76": 29.3,
+  "diagnosis": "large_shift"
+}
+```
+
+Supported first-pass adapters:
+
+- `colour-science-colour`: local color-space diagnostics; uses official `colour-science` when installed, otherwise built-in local math.
+- `funie-gan`: CPU PyTorch probe using the downloaded `funie_generator.pth` weight.
+- `resolve-dctl`: local DCTL file index.
+- `utility-dctls`: local DCTL file index.
 
 ## Demo
 

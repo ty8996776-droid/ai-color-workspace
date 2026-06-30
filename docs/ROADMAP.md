@@ -14,6 +14,8 @@
 
 - Publish a README screenshot or terminal GIF for the current JSON API demo.
 - Add a first release note once the quick-start path is verified from a clean clone.
+- Publish the `v0.1.0` release package after `docs/RELEASE_CHECKLIST.md` passes.
+- Set repository topics for underwater video, color grading, DaVinci Resolve, DCTL, LUT, and AI video discovery.
 - Add a V2 API bridge to `Timo水下调色工作台.html`.
 - Send current frame metadata to `/analyze`.
 - Show Planner and Scorer output in the UI.

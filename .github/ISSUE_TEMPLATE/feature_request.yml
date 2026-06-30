@@ -1,0 +1,45 @@
+name: Feature request
+description: Suggest an underwater color grading, DaVinci, DCTL, LUT, mask, or API improvement.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: workflow
+    attributes:
+      label: Workflow area
+      options:
+        - Underwater color correction
+        - DaVinci Resolve handoff
+        - DCTL or LUT delivery
+        - Mask or segmentation
+        - Local model runtime
+        - API integration
+        - Demo or release asset
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: need
+    attributes:
+      label: What should the workspace help with?
+      placeholder: I want to correct green water while protecting skin tones...
+    validations:
+      required: true
+  - type: textarea
+    id: current_workaround
+    attributes:
+      label: Current workaround
+      description: How do you handle this today in DaVinci Resolve or another tool?
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Useful result
+      description: What output would make this feature clearly useful?
+      placeholder: A JSON node plan, DCTL preset, LUT, mask preview, or scored export record...
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Privacy check
+      options:
+        - label: I can describe the need without uploading private footage or secrets.
+          required: true

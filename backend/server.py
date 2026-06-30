@@ -7,7 +7,9 @@ from ai.analyzer.agent import analyze
 from ai.common import WORKSPACE_ROOT, fail, log_event, ok
 from ai.dctl_engine.engine import build_params
 from ai.memory.store import MemoryStore
+from ai.knowledge.github_registry import external_knowledge_models, list_repositories
 from ai.planner.agent import plan
+from ai.runtime.local_models import list_local_models, run_local_model
 from ai.scorer.agent import score
 
 
@@ -46,6 +48,12 @@ class ColorWorkspaceApp:
                 return ok({"record_id": record_id, "score_result": score_result})
             if method == "GET" and path == "/history":
                 return ok({"history": self.memory.list_history(limit=int(payload.get("limit", 20)))})
+            if method == "GET" and path == "/external-repos":
+                return ok({"repositories": list_repositories()})
+            if method == "GET" and path == "/local-models":
+                return ok(list_local_models())
+            if method == "POST" and path == "/local-models/run":
+                return ok(run_local_model(payload))
             if method == "GET" and path == "/models":
                 return ok(
                     {
@@ -55,6 +63,7 @@ class ColorWorkspaceApp:
                             {"name": "rule-dctl-engine", "type": "placeholder", "status": "active"},
                             {"name": "rule-scorer", "type": "placeholder", "status": "active"},
                         ]
+                        + external_knowledge_models()
                     }
                 )
             return fail(f"Route not found: {method} {path}", "not_found")

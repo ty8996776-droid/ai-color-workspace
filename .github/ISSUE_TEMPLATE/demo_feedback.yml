@@ -1,0 +1,41 @@
+name: Demo feedback
+description: Share feedback after trying the README or docs/DEMO.md walkthrough.
+title: "[Demo]: "
+labels: ["demo", "feedback"]
+body:
+  - type: dropdown
+    id: demo_path
+    attributes:
+      label: Demo path tried
+      options:
+        - README quick start
+        - docs/DEMO.md curl flow
+        - Release download
+        - Local source checkout
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: What worked or failed?
+      placeholder: The API started, but the `/grade` response was confusing because...
+    validations:
+      required: true
+  - type: textarea
+    id: missing_context
+    attributes:
+      label: What would make the demo clearer?
+      placeholder: Screenshot, terminal GIF, sample response, troubleshooting note...
+  - type: input
+    id: topic_keywords
+    attributes:
+      label: Keywords that match your use case
+      placeholder: "underwater, color grading, DaVinci, DCTL, LUT, mask, segmentation"
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed private media, API keys, `.env` contents, and secrets from this report.
+          required: true

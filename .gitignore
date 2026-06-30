@@ -5,3 +5,8 @@ __pycache__/
 .env
 .env.*
 !.env.example
+third_party/
+.venv-external/
+output/external-runtime/
+output/releases/
+dist/

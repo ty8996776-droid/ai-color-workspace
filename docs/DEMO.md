@@ -66,7 +66,19 @@ Example response:
   "ok": true,
   "data": {
     "node_tree": ["Balance", "Exposure", "WB", "Contrast", "Water", "Look", "Sharpen"],
-    "recommended_dctl": ["underwater_balance", "deep_blue"]
+    "recommended_dctl": ["underwater_balance", "deep_blue"],
+    "external_capabilities": [
+      {
+        "id": "colour-science-colour",
+        "name": "colour-science/colour",
+        "category": "color_science",
+        "integration_phase": "phase_1_analyzer_scorer"
+      }
+    ],
+    "external_warnings": [
+      "Treat every GitHub project as an external reference until dependency, license, and image-quality tests pass."
+    ],
+    "external_next_step": "Create optional adapters that emit JSON metrics/preset suggestions before adding runtime dependencies."
   },
   "error": null
 }
@@ -117,3 +129,12 @@ curl -sS http://127.0.0.1:8790/history
 ```
 
 Use this to verify that `/export` wrote a local Memory record.
+
+## 8. Inspect External References
+
+```bash
+curl -sS http://127.0.0.1:8790/external-repos
+curl -sS http://127.0.0.1:8790/local-models
+```
+
+These routes show conservative GitHub reference projects and local model status. They do not upload media or run unverified third-party code by default.

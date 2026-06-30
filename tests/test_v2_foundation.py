@@ -78,6 +78,66 @@ class V2FoundationTests(unittest.TestCase):
             self.assertTrue(path.exists(), f"missing prompt file: {name}")
             self.assertGreater(path.stat().st_size, 20)
 
+
+    def test_github_registry_recommends_underwater_capabilities(self):
+        from ai.knowledge.github_registry import list_repositories, recommend_for_analysis
+
+        all_repos = list_repositories()
+        self.assertGreaterEqual(len(all_repos), 5)
+        result = recommend_for_analysis({"scene": "underwater", "water": "blue", "skin": True, "noise": "low"})
+        names = {item["name"] for item in result["recommendations"]}
+
+        self.assertIn("colour-science/colour", names)
+        self.assertIn("wangyanckxx/Single-Underwater-Image-Enhancement-and-Color-Restoration", names)
+        self.assertIn("thatcherfreeman/utility-dctls", names)
+        self.assertIn("xahidbuffon/FUnIE-GAN", names)
+        json.dumps(result)
+
+    def test_planner_includes_external_capabilities(self):
+        from ai.planner.agent import plan
+
+        result = plan({"scene": "underwater", "water": "blue", "skin": False, "noise": "low"})
+        self.assertIn("external_capabilities", result)
+        self.assertTrue(any(item["id"] == "colour-science-colour" for item in result["external_capabilities"]))
+        self.assertTrue(result["external_warnings"])
+        json.dumps(result)
+
+
+    def test_github_registry_contains_all_discovered_repositories(self):
+        from ai.knowledge.github_registry import list_repositories
+
+        ids = {item["id"] for item in list_repositories()}
+        expected = {
+            "colour-science-colour",
+            "single-underwater-image-enhancement",
+            "funie-gan",
+            "utility-dctls",
+            "opencolorio",
+            "libplacebo",
+            "water-net-code",
+            "all-in-one-underwater-enhancement",
+            "fiveaplus-network",
+            "ursct-sesr",
+            "open-display-transform",
+            "resolve-dctl",
+        }
+
+        self.assertTrue(expected.issubset(ids), sorted(expected - ids))
+
+    def test_models_endpoint_exposes_external_knowledge_models(self):
+        from backend.server import create_app
+
+        response = create_app(memory_db_path=":memory:").handle("GET", "/models", {})
+        self.assertTrue(response["ok"])
+        external_models = [item for item in response["data"]["models"] if item.get("type") == "external_knowledge"]
+        external_names = {item["name"] for item in external_models}
+
+        self.assertGreaterEqual(len(external_models), 12)
+        self.assertIn("github:colour-science/colour", external_names)
+        self.assertIn("github:Li-Chongyi/Water-Net_Code", external_names)
+        self.assertIn("github:jedypod/open-display-transform", external_names)
+        json.dumps(response)
+
     def test_api_routes_are_callable_with_json(self):
         from backend.server import create_app
 
@@ -88,10 +148,38 @@ class V2FoundationTests(unittest.TestCase):
         score_response = app.handle("POST", "/export", {"dctl_params": grade_response["data"]})
         history_response = app.handle("GET", "/history", {})
         models_response = app.handle("GET", "/models", {})
+        external_repos_response = app.handle("GET", "/external-repos", {})
 
-        for response in [analyze_response, plan_response, grade_response, score_response, history_response, models_response]:
+        self.assertTrue(external_repos_response["ok"])
+        self.assertGreaterEqual(len(external_repos_response["data"]["repositories"]), 5)
+        for response in [analyze_response, plan_response, grade_response, score_response, history_response, models_response, external_repos_response]:
             self.assertTrue(response["ok"])
             json.dumps(response)
+
+    def test_local_model_status_and_colour_run_are_callable(self):
+        from ai.runtime.local_models import list_local_models, run_local_model
+
+        status = list_local_models()
+        self.assertIn("models", status)
+        self.assertTrue(any(item["id"] == "colour-science-colour" for item in status["models"]))
+
+        result = run_local_model({"model_id": "colour-science-colour"})
+        self.assertEqual(result["model"], "colour-science-colour")
+        self.assertIn("delta_e_76", result)
+        self.assertGreaterEqual(result["delta_e_76"], 0)
+        json.dumps(result)
+
+    def test_local_model_api_routes_are_callable(self):
+        from backend.server import create_app
+
+        app = create_app(memory_db_path=":memory:")
+        status_response = app.handle("GET", "/local-models", {})
+        run_response = app.handle("POST", "/local-models/run", {"model_id": "colour-science-colour"})
+
+        self.assertTrue(status_response["ok"])
+        self.assertTrue(run_response["ok"])
+        self.assertIn("models", status_response["data"])
+        self.assertIn("delta_e_76", run_response["data"])
 
 
 if __name__ == "__main__":

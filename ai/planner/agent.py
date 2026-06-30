@@ -1,6 +1,7 @@
 from typing import Any, Dict, List
 
 from ai.common import load_prompt, log_event
+from ai.knowledge.github_registry import recommend_for_analysis
 
 
 def _nodes_for_scene(scene: str, water: str, skin: bool) -> List[str]:
@@ -31,9 +32,13 @@ def plan(analyzer_result: Dict[str, Any]) -> Dict[str, Any]:
     if analyzer_result.get("noise") in {"medium", "high"}:
         dctl.append("noise_control")
 
+    external = recommend_for_analysis(analyzer_result)
     result = {
         "node_tree": _nodes_for_scene(scene, water, skin),
         "recommended_dctl": dctl,
+        "external_capabilities": external["recommendations"],
+        "external_warnings": external["warnings"],
+        "external_next_step": external["next_step"],
     }
     log_event("planner", "plan", {"prompt_chars": len(prompt), "result": result})
     return result
